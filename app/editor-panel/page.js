@@ -6,7 +6,7 @@ import { BASE_URL } from "../config";
 import Link from "next/link";
 import clsx from "clsx";
 
-export default () => {
+export default function PanelPage () {
     const [user, setUser] = useState({});
     const [isEditor, setIsEditor] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -63,7 +63,7 @@ export default () => {
         <div>
             { !isEditor &&
                 <div>
-                    You are a subscriber/unauthorized now. So you don't have access to editor panel.
+                    You are a subscriber/unauthorized now. So you don&apos;t have access to editor panel.
                 </div>
             }
             { isEditor &&
@@ -79,7 +79,7 @@ export default () => {
                         </li>
                         {
                             pages.map(page => (
-                            <li>
+                            <li key={`key-${page}`}>
                                 <a href="#" onClick={() => {
                                 setCurrentPage(page);
                                 }} className={
@@ -128,7 +128,7 @@ export default () => {
                         }} id="category" name="category">
                             {
                                 categories.map(category => {
-                                    return <option value={category.id}>{category.name}</option>;
+                                    return <option key={`key-${category.id}`} value={category.id}>{category.name}</option>;
                                 })
                             }
                         </select>

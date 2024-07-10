@@ -4,7 +4,7 @@ import { BASE_URL } from "@/app/config";
 import Link from "next/link";
 import { useEffect, useState } from "react"
 
-export default ({ params }) => {
+export default function ArticlePage ({ params }) {
     const [article, setArticle] = useState(null);
     const [relatedNewsList, setRelatedNewsList] = useState([]);
     const [ratings, setRatings] = useState([]);
@@ -63,7 +63,7 @@ export default ({ params }) => {
                     {
                         relatedNewsList.map(news => {
                             return (
-                                <div>
+                                <div key={`related-${news.id}`}>
                                     <Link className="text-purple-950 hover:font-semibold hover:underline" href={`/article/${news.id}`}><h2 className="text-lg py-2">{ news.headline }</h2></Link>
                                 </div>
                             )
@@ -113,7 +113,7 @@ export default ({ params }) => {
                     <div>
                         {
                             ratings.map(rating => 
-                                <div>
+                                <div key={`key-${rating.time}`}>
                                     <div>{ rating.user.username }</div>
                                     <div>{ rating.value }</div>
                                     <div>{ rating.body }</div>

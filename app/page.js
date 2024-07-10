@@ -8,7 +8,7 @@ import Link from "next/link";
 import Header from "./components/header";
 
 
-export default () => {
+export default function HomePage() {
   // PAGINATION
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +47,7 @@ export default () => {
               </li>
               {
                 pages.map(page => (
-                  <li>
+                  <li key={`key-${page}`}>
                     <a href="#" onClick={() => {
                       setCurrentPage(page);
                     }} className={
@@ -69,7 +69,7 @@ export default () => {
           {
             newsList.map(news => {
               return (
-                <div className="bg-green-50 p-4 my-4">
+                <div key={`news-${news.id}`} className="bg-green-50 p-4 my-4">
                   <h1 className="text-2xl font-bold">{ news.headline }</h1>
                   <p>{ news.body.slice(0, 50) }... <Link className="font-semibold text-purple-900 hover:underline" href={`/article/${news.id}`}>See more</Link></p>
                 </div>
@@ -86,7 +86,7 @@ export default () => {
               </li>
               {
                 pages.map(page => (
-                  <li>
+                  <li key={`key-${page}`}>
                     <a href="#" onClick={() => {
                       setCurrentPage(page);
                     }} className={

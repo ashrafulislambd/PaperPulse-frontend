@@ -3,7 +3,7 @@
 import { BASE_URL } from "@/app/config";
 import { useState, useEffect } from "react";
 
-export default ({ params }) => {  
+export default function EditPage ({ params }) {  
     const [user, setUser] = useState({});
     const [isEditor, setIsEditor] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -48,7 +48,7 @@ export default ({ params }) => {
         <div>
             { !isEditor &&
                 <div>
-                    You are a subscriber/unauthorized now. So you don't have access to editor panel.
+                    You are a subscriber/unauthorized now. So you don&apos;t have access to editor panel.
                 </div>
             }
             { isEditor &&
@@ -66,7 +66,7 @@ export default ({ params }) => {
                     }} id="category" name="category">
                         {
                             categories.map(category => {
-                                return <option value={category.id} selected={category.id == article.category}>{category.name}</option>;
+                                return <option key={`key-${category.id}`} value={category.id} selected={category.id == article.category}>{category.name}</option>;
                             })
                         }
                     </select>

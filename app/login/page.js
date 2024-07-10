@@ -5,7 +5,7 @@ import { BASE_URL } from "../config";
 import { isLoggedIn } from "../auth";
 import { redirect, useRouter } from "next/navigation";
 
-export default () => {
+export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

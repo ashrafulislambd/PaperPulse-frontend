@@ -5,7 +5,7 @@ import { BASE_URL } from "../config";
 import { isLoggedIn } from "../auth";
 import { useRouter } from "next/router";
 
-export default () => {
+export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -15,9 +15,10 @@ export default () => {
 
     const [errors, setErrors] = useState({});
 
+    const router = useRouter();
+
     useEffect(() => {
         if(isLoggedIn()) {
-            router = useRouter();
             router.push("/");
         }
     }, []);

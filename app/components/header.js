@@ -103,7 +103,7 @@ const Header = () => {
                 {
                     categories.map(category => {
                         return (
-                            <Link href={`/category/${category.id}`}>
+                            <Link key={`cat-${category.id}`} href={`/category/${category.id}`}>
                                 <li className="bg-sky-700 px-5 py-2 border border-gray-600 hover:bg-sky-800 hover:cursor-pointer">
                                     { category.name }
                                 </li>

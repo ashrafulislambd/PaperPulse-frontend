@@ -4,7 +4,7 @@ import { BASE_URL } from "@/app/config";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default ({params}) => {
+export default function EditorPanelPage ({params}) {
     const [user, setUser] = useState({});
     const [isEditor, setIsEditor] = useState(false);
     const router = useRouter();
@@ -28,7 +28,7 @@ export default ({params}) => {
         <div>
             { !isEditor &&
                 <div>
-                    You are a subscriber/unauthorized now. So you don't have access to editor panel.
+                    You are a subscriber/unauthorized now. So you don&apos;t have access to editor panel.
                 </div>
             }
             { isEditor &&
