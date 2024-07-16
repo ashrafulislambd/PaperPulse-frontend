@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "@/app/config";
 import clsx from "clsx";
 import Link from "next/link";
+import ArticleBlock from "@/app/components/ArticleBlock";
+import ListBlock from "@/app/components/ListBlock";
 
 export default function CategoryPage ({ params }) {
     // PAGINATION
@@ -37,6 +39,28 @@ export default function CategoryPage ({ params }) {
 
     // MAIN PAGE CODES END HERE
 
+    // LAYOUT COMMON CODE
+    const [opNewsList, setOpNewsList] = useState([]);
+
+    useEffect(() => {
+        fetch(`${BASE_URL}/article/list/?cat_id=4`)
+            .then(res => res.json())
+            .then(res => {
+                setOpNewsList(res.results);
+            });
+    }, []);
+
+    const [latestNewsList, setLatestNewsList] = useState([]);
+
+    useEffect(() => {
+        fetch(`${BASE_URL}/article/list/?sort_by=time`)
+            .then(res => res.json())
+            .then(res => {
+                setLatestNewsList(res.results);
+            });
+    }, []);
+    // END LAYOUT COMMON CODE
+
     return (
         <div>
             <div>
@@ -69,16 +93,21 @@ export default function CategoryPage ({ params }) {
                     </li>
                     </ul>
                 </nav>
-                {
-                    newsList.map(news => {
-                    return (
-                        <div key={`news-${news.id}`} className="bg-green-50 p-4 my-4">
-                        <h1 className="text-2xl font-bold">{ news.headline }</h1>
-                        <p>{ news.body.slice(0, 150) }... <Link className="font-semibold text-purple-900 hover:underline" href={`/article/${news.id}`}>See more</Link></p>
-                        </div>
-                    )
-                    })
-                }
+                <div className="flex">
+                    <div className="flex flex-wrap w-[1200px]">
+                    {
+                        newsList.map(news => {
+                            return (
+                                <ArticleBlock key={`news-${news.id}`} news={news} />
+                            )
+                        })
+                    }
+                    </div>
+                    <div>
+                    <ListBlock newsList={latestNewsList} />
+                    <ListBlock newsList={opNewsList} titleName="Opinion" />
+                    </div>
+                </div>
                 <nav className="flex justify-center" aria-label="Page navigation example">
                     <ul class="inline-flex -space-x-px text-sm">
                     <li>
